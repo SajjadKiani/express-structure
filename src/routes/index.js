@@ -2,16 +2,16 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/index');
 
-/* GET programming languages. */
+/* GET */
 router.get('/', controller.get);
   
-/* POST programming language */
+/* POST  */
 router.post('/', controller.create);
 
-/* PUT programming language */
+/* PUT  */
 router.put('/:id', controller.update);
 
-/* DELETE programming language */
+/* DELETE  */
 router.delete('/:id', controller.remove);
 
 module.exports = router;

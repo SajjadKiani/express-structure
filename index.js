@@ -4,16 +4,21 @@ const app = express();
 const port = process.env.PORT || 3000;
 const routes = require('./src/routes/index');
 
+const logger = ( req, res, next) => {
+  const date = new Date()
+  console.log(req.method ,req.originalUrl , date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()  )
+  next()
+}
+
 app.use(bodyParser.json());
+app.use(logger);
 app.use(
   bodyParser.urlencoded({
     extended: true,
   })
 );
 
-app.get('/', (req, res) => {
-  res.json({'message': 'ok'});
-})
+app.use('/',express.static('src/view'))
 
 app.use('/app', routes);
 
@@ -26,6 +31,6 @@ app.use((err, req, res, next) => {
   return;
 });
 
-app.listen(port, '0.0.0.0', () => {
+app.listen(port, 'localhost', () => {
   console.log(`Example app listening at http://localhost:${port}`)
 });
